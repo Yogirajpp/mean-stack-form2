@@ -2,24 +2,10 @@
 <div class="form-container">
   <h2>Forms</h2>
 
-  <!-- Display forms -->
-  <div *ngFor="let form of forms">
-    <div class="form-item">
-      <p>Name: {{ form.name }}</p>
-      <p>Email: {{ form.email }}</p>
-      <p>Mobile No: {{ form.mobileNo }}</p>
-      <!-- <p>Password: {{ form.password }}</p>
-      <p>Confirm Password: {{ form.confirmPassword }}</p> -->
-      <!-- <p>Created At: {{ form.createdAt | date: 'medium' }}</p> -->
-      <!-- Add more fields as needed -->
-      <button (click)="deleteForm(form._id)">Delete</button>
-    </div>
-  </div>
-
   <!-- Create new form -->
   <div class="form-item">
     <h3>Create New Form</h3>
-    <form (submit)="submitForm()">
+    <form *ngIf="!selectedFormId" (submit)="submitForm()">
       <label for="name">Name:</label>
       <input type="text" id="name" name="name" [(ngModel)]="newForm.name" required>
 
@@ -38,11 +24,46 @@
       <!-- Add more fields as needed -->
 
       <button type="submit">Submit</button>
-      
+
+      <!-- Error alert -->
+      <div *ngIf="showError" class="error-alert">
+        <p>Please fill in all required fields.</p>
+      </div>
+
       <!-- Success alert -->
       <div *ngIf="showAlert" class="success-alert">
         <p>Form submitted successfully!</p>
       </div>
     </form>
+  </div>
+
+  <!-- Update existing form -->
+  <div class="form-item">
+    <h3>Update Existing Form</h3>
+    <div>
+      <label for="selectedEmail">Email:</label>
+      <input type="email" id="selectedEmail" name="selectedEmail" [(ngModel)]="selectedForm.email" required>
+    </div>
+
+    <div>
+      <label for="selectedPassword">Password:</label>
+      <input type="password" id="selectedPassword" name="selectedPassword" [(ngModel)]="selectedForm.password" required>
+    </div>
+
+    <!-- Allow users to update name and mobileNo based on email and password -->
+    <div *ngIf="selectedForm.email && selectedForm.password">
+      <form (submit)="updateForm(selectedFormId)">
+        <!-- Update form fields based on your data model -->
+        <label for="updatedName">Name:</label>
+        <input type="text" id="updatedName" name="updatedName" [(ngModel)]="updatedForm.name" required>
+
+        <label for="updatedMobileNo">Mobile No:</label>
+        <input type="tel" id="updatedMobileNo" name="updatedMobileNo" [(ngModel)]="updatedForm.mobileNo" required>
+
+        <!-- Add more fields as needed -->
+
+        <button type="submit">Update</button>
+      </form>
+    </div>
   </div>
 </div>
