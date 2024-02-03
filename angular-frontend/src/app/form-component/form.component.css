@@ -1,0 +1,47 @@
+/* form.component.css */
+.form-container {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+
+  /* form.component.css */
+  .success-alert {
+    background-color: #4caf50; /* Green background color */
+    color: white; /* White text color */
+    padding: 15px; /* Padding */
+    margin-bottom: 20px; /* Bottom margin */
+  }
+
+  
+  .form-item {
+    border: 1px solid #ccc;
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+  
+  form {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  label {
+    margin-bottom: 5px;
+  }
+  
+  input {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+  
+  button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  

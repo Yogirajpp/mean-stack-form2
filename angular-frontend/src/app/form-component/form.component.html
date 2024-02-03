@@ -1,0 +1,48 @@
+<!-- form.component.html -->
+<div class="form-container">
+  <h2>Forms</h2>
+
+  <!-- Display forms -->
+  <div *ngFor="let form of forms">
+    <div class="form-item">
+      <p>Name: {{ form.name }}</p>
+      <p>Email: {{ form.email }}</p>
+      <p>Mobile No: {{ form.mobileNo }}</p>
+      <!-- <p>Password: {{ form.password }}</p>
+      <p>Confirm Password: {{ form.confirmPassword }}</p> -->
+      <!-- <p>Created At: {{ form.createdAt | date: 'medium' }}</p> -->
+      <!-- Add more fields as needed -->
+      <button (click)="deleteForm(form._id)">Delete</button>
+    </div>
+  </div>
+
+  <!-- Create new form -->
+  <div class="form-item">
+    <h3>Create New Form</h3>
+    <form (submit)="submitForm()">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" [(ngModel)]="newForm.name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" [(ngModel)]="newForm.email" required>
+
+      <label for="mobileNo">Mobile No:</label>
+      <input type="tel" id="mobileNo" name="mobileNo" [(ngModel)]="newForm.mobileNo" required>
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password" [(ngModel)]="newForm.password" required>
+
+      <label for="confirmPassword">Confirm Password:</label>
+      <input type="password" id="confirmPassword" name="confirmPassword" [(ngModel)]="newForm.confirmPassword" required>
+
+      <!-- Add more fields as needed -->
+
+      <button type="submit">Submit</button>
+      
+      <!-- Success alert -->
+      <div *ngIf="showAlert" class="success-alert">
+        <p>Form submitted successfully!</p>
+      </div>
+    </form>
+  </div>
+</div>
