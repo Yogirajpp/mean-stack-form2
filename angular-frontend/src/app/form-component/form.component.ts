@@ -20,6 +20,8 @@ export class FormComponent implements OnInit {
   showAlert: boolean = false; // Flag to control alert visibility
   showError: boolean = false; // Flag to control error alert visibility
   selectedFormId: string | undefined;
+  showUpdateSuccess: boolean = false; // Flag to control success message visibility
+
   // selectedFormId: string = "65be977667766ec59fb8f3dd";
 
   constructor(private formService: FormService) {}
@@ -102,13 +104,13 @@ export class FormComponent implements OnInit {
 
   // ... (existing code)
 
-  updateForm(id: string | undefined) {
-    // Check if id is defined before using it
-    if (!id) {
-      console.error('Selected Form ID is undefined.');
-      return; // Exit the method if id is undefined
+  updateForm(email: string | undefined) {
+    // Check if email is defined before using it
+    if (!email) {
+      console.error('Email is undefined.');
+      return; // Exit the method if email is undefined
     }
-
+  
     // Check if any required field is empty
     if (
       !this.updatedForm.name ||
@@ -120,9 +122,9 @@ export class FormComponent implements OnInit {
     } else {
       // Clear error flag if no errors
       this.showError = false;
-
+  
       console.log('Updated Form Data:', this.updatedForm);
-      this.formService.updateForm(id, this.updatedForm).subscribe(
+      this.formService.updateForm(email, this.updatedForm).subscribe(
         () => {
           // Update forms after successful update
           this.loadForms();
@@ -130,6 +132,17 @@ export class FormComponent implements OnInit {
           this.updatedForm = {};
           // Set showAlert to true for success alert
           this.showAlert = true;
+
+          // Set showUpdateSuccess to true to display success message
+          this.showUpdateSuccess = true;
+
+          setTimeout(() => {
+            this.showUpdateSuccess = false; // Hide success message after a delay
+          }, 3000); // Adjust the delay as needed
+
+          // Reset showAlert flag to false
+          this.showAlert = false;
+        
         },
         (error) => {
           console.error('Error updating form:', error);
@@ -139,6 +152,7 @@ export class FormComponent implements OnInit {
       );
     }
   }
+  
   
 
   // Implement other CRUD operations as needed

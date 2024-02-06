@@ -74,14 +74,10 @@ const deleteForm = async (req, res) => {
 
 // update a form
 const updateForm = async (req, res) => {
-    const { id } = req.params;
+    const { email } = req.params;
 
     try {
-        if (!mongoose.Types.ObjectId.isValid(id)) {
-            return res.status(404).json({ error: 'No such form' });
-        }
-
-        const form = await formModels.findOneAndUpdate({ _id: id }, req.body, { new: true });
+        const form = await formModels.findOneAndUpdate({ email: email }, req.body, { new: true });
 
         if (!form) {
             return res.status(404).json({ error: 'No such form' });
@@ -93,6 +89,7 @@ const updateForm = async (req, res) => {
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
 
 module.exports = {
     createForm,

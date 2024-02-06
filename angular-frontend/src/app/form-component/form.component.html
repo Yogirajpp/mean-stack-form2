@@ -52,7 +52,7 @@
 
     <!-- Allow users to update name and mobileNo based on email and password -->
     <div *ngIf="selectedForm.email && selectedForm.password">
-      <form (submit)="updateForm(selectedFormId)">
+      <form (submit)="updateForm(selectedForm.email)">
         <!-- Update form fields based on your data model -->
         <label for="updatedName">Name:</label>
         <input type="text" id="updatedName" name="updatedName" [(ngModel)]="updatedForm.name" required>
@@ -63,7 +63,12 @@
         <!-- Add more fields as needed -->
 
         <button type="submit">Update</button>
+
+        <div *ngIf="showUpdateSuccess" class="success-message">
+          <p>Data updated successfully!</p>
+        </div>
       </form>
     </div>
   </div>
+
 </div>

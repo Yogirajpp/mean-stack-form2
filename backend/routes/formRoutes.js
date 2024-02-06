@@ -17,6 +17,6 @@ router.post('/', createForm)
 router.delete('/:id', deleteForm)
 
 // UPDATE a form
-router.patch('/:id', updateForm)
+router.patch('/:email', updateForm)
 
 module.exports = router
